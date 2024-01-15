@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+    --sidebar-color:#2D3250;
+    --main-bgcolor:#161A30;
+    --navbar-color:#3D3B40;
+    --text-second:#a0a19f;
+    --active:green;
+}
+
+body{
+    height: 100vh;
+}
