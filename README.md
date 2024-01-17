@@ -12,18 +12,19 @@ A simple chatbot web app powered by OpenAI API, built with React.js for the fron
 - [Project Structure](#project-structure)
 - [Usage](#usage)
 - [API Documentation](#api-documentation)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## Overview
 
-The chatbot web app provides a user-friendly interface for interacting with a chatbot powered by OpenAI. The frontend is built with React.js, offering a responsive and intuitive user experience. The backend, implemented in Express.js, serves as the communication layer between the frontend and the OpenAI API.
+The chatbot web app provides a user-friendly interface for interacting with a chatbot powered by OpenAI. The frontend is built with React.js, offering a  intuitive user experience. The backend, implemented in Express.js with Mongodb atlas, serves as the communication layer between the frontend and the OpenAI API.
 
 ## Features
 
 - Real-time chat interaction with the OpenAI-powered chatbot.
-- Responsive and user-friendly frontend built with React.js.
+- User-friendly frontend built with React.js.
 - Seamless communication between frontend and backend using Express.js.
+- Serverless connection with mongodb atlas
+
 
 ## Getting Started
 
@@ -35,57 +36,64 @@ The chatbot web app provides a user-friendly interface for interacting with a ch
 
 1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/your-username/chatbot-web-app.git
-   cd chatbot-web-app
+``````
+   git clone https://github.com/ankitmishraindia/Chatbot
+``````
 
-cd frontend
-npm install
+2. Go to Frontend
+``````
+   cd frontend-chatbot
+   npm install
+``````
 
-cd ../backend
-npm install
+3. Install Backend
+   ```bash``````
+   cd backend-chatbot
+   npm install
+``````
+   
 
 ## Project Structure
-
-chatbot-web-app/
-  ├── frontend/
+```
+chatbot/
+  ├── frontend-chatbot/
   │   ├── src/
   │   ├── public/
   │   ├── package.json
   │   ├── ...
-  ├── backend/
+  ├── backend-chatbot/
   │   ├── server.js
   │   ├── package.json
   │   ├── ...
   ├── README.md
 
+```
+
+
 
 ## Usage
 
-1. Start the backend Server.
-```
- cd backend
- npm start
-```
-2. The backend will run at http://localhost:3001.
+1. Start the frontend Server.
+```````
+ cd frontend-chatbot
+ npm run dev
+```````
+2. The backend will run at http://localhost:5173.
 
 3. Start the backend Server.
 ```
- cd backend
- npm start
+ cd backend-chatbot
+ npm run dev
 ```
-4.The backend will run at http://localhost:3001.
+4.The backend will run at http://localhost:7000.
 
 ## API Documentation
 
 - The backend API provides the following endpoints:
 
-GET /api/messages: Retrieve chat messages.
-POST /api/messages: Send a user message to the chatbot.
+GET /chatbot/oldChats: Retrieve chat messages.
+POST /chatbot/updateChats: Send a user message to the chatbot.
+delete /chatbot/deleteChats: Delete current conversations to the chatbot.
 For detailed API documentation, refer to the API Documentation file.
 
 
-## Contributing
-We welcome contributions! Please follow the guidelines in the CONTRIBUTING.md file.
-
-## License
