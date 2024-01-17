@@ -1,13 +1,17 @@
 import {Router} from 'express'
-import { getContext, getResponse, previousConversations } from '../Controller/controller.js'
+import { updateChats, previousConversations, removeChat } from '../Controller/controller.js'
 
 
 const router=Router()
 
-router.get('/context',getContext)
+
 
 router.get('/oldChats',previousConversations)
 
-router.post('/findRes',getResponse)
+router.post('/updateChats',updateChats)
+
+router.delete('/deleteChats',removeChat)
+
+
 
 export default router;

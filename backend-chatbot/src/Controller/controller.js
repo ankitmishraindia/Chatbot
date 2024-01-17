@@ -2,32 +2,7 @@
 import OpenAI from 'openai'
 import Conversation from '../Models/chatbotModel.js';
 
-//getting context for user message
-export const getContext=async(req,res)=>{
-    try {
-          const {findContext}=req.body;
-          if(!findContext){
-            throw new Error("find context user message can not be empty")
-          }
-          const openai=new OpenAI({apiKey:process.env.OPENAPI_KEY})
-          const response = await openai.chat.completions.create({
-            model: "gpt-3.5-turbo",
-            messages: [
-            {"role": "user", "content": findContext}],
-            
-          });
 
-          res.status(200).json({
-            message:'Success',
-            Data: response.choices[0]
-          })
-    } catch (error) {
-        res.status(500).json({
-            message:error.message,
-            Success:'failed'
-          })
-    }
-}
 
 //find all conversation of previous chats
 export const previousConversations=async(req,res)=>{
@@ -50,14 +25,28 @@ export const previousConversations=async(req,res)=>{
 }
 
 //find replies of user messages
-export const getResponse=async (req,res)=>{
+export const updateChats=async (req,res)=>{
     try {
-        const {context,userMessage}=req.body;
+        let {context,userMessage}=req.body;
         if(!context || !userMessage){
             throw new Error("Context or userMessage is empty")
         }
+        //set instance of openapi
+        const openai=new OpenAI({apiKey:process.env.OPENAPI_KEY}) 
+
+        //find context for new chat
+        if(context==='New Chat'){
+          
+          const response = await openai.chat.completions.create({
+            model: "gpt-3.5-turbo",
+            messages: [
+            {"role": "user", "content": `Find the title of given text group maximun in five words: ${userMessage}`}],
+            
+          });
+          context=response.choices[0].message.content;
+        }
        //get response from openapi
-       const openai=new OpenAI({apiKey:process.env.OPENAPI_KEY})
+       
        const response = await openai.chat.completions.create({
          model: "gpt-3.5-turbo",
          messages: [
@@ -66,54 +55,56 @@ export const getResponse=async (req,res)=>{
        });
 
        //save data to mongodb atlas
-       const conversation = await Conversation.findOneAndUpdate(
-        { context },
-        {
-          $push: {
-            messages: {
-              role: 'user',
-              content: userMessage,
-            },
-            messages: {
-              role: 'bot',
-              content: response.choices[0].message.content,
-            },
-          },
-        })
+       let conversation=await Conversation.findOne({context})
 
-        if(!conversation){
-            const newConversation = await Conversation.create(
-                { context },
-                {
-                  $push: {
-                    messages: {
-                      role: 'user',
-                      content: userMessage,
-                    },
-                    messages: {
-                      role: 'bot',
-                      content: response.choices[0].message.content,
-                    },
-                  },
-                })
+       if(!conversation){
+          conversation= new Conversation({context,messages:[]})
+       }
 
-               return res.status(200).json({
-                    Success:true,
-                    Data:response.choices[0],
-                    newConversation
-                  })
-        }
+       //add usermessage to messages
+       conversation.messages.push({role:'user',content:userMessage})
 
+       //add bot respose to messages
+       conversation.messages.push({role:'bot',content:response.choices[0].message.content})
+       conversation.save();
        res.status(200).json({
          Success:true,
          Data:response.choices[0],
-         conversation
+         updated:conversation
        })
     } catch (error) {
+       console.log(error.stack)
         res.status(500).json({
             message:error.message,
             Success:'failed'
           })
     }
 }
+
+//delete chats
+export const removeChat=async function(req,res,next){
+  try {
+     const { context }=req.query;
+     if(!context){
+      throw new Error('Context not found')
+     }
+     const conversation=await Conversation.findOneAndDelete({context})
+     if(!conversation)
+     {
+       throw new Error("Could not find converstation for delete")
+     }
+     res.status(200).json({
+       Success:true,
+       message:'conversation deleted successfully',
+       conversation
+     })
+  } catch (error) {
+    console.log(error.stack)
+        res.status(500).json({
+            message:error.message,
+            Success:'failed'
+          })
+  }
+ 
+ }
 

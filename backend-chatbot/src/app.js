@@ -8,11 +8,14 @@ import routes from './Router/route.js';
 const app=express();
 
 //middleware
-app.use(express.json());
-app.use(express.urlencoded({extended:true}))
+app.use(express.json())
 app.use(cors({
     origin:process.env.FRONTEND_URI
 }))
+
+//it is  used as a middleware to extract details from encoded urls 
+app.use(express.urlencoded({ extended: true }));
+
 
 //import route
 app.use('/chatbot/',routes)

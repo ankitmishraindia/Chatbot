@@ -8,13 +8,51 @@ import { IoSearch } from "react-icons/io5";
 import { IoIosArrowDown } from "react-icons/io";
 import navImage from './assets/logo-image.png'
 import ChatContainer from "./components/ChatContainer";
+import {  useAppState } from "./myContext";
+import axios from "axios";
+import { useEffect } from "react";
+
+
 
 
 function App() {
   
+  const {chatData,setChatData}=useAppState()
+
+  useEffect(
+    ()=>{
+            async function getData(){
+            try {
+                    const res=await axios.get('http://localhost:7000/chatbot/oldChats')
+
+                   setChatData((state)=>({...state,
+                                 oldChats:res.data.conversations.reverse(),
+                                 messageData:res.data.conversations[0].messages,
+                                context:res.data.conversations[0].context}))
+             console.log(res.data.conversations[0])
+             
+            } catch (error) {
+                    console.log(error.message)
+            }      
+         }
+         getData()
+      }
+    ,[setChatData]
+)
+ 
+useEffect(() => {
+  // Check if chatData.messageData is not null or undefined before logging
+  if (chatData.messageData) {
+    console.log("messageData changed:");
+    // You can add additional logic or side effects here
+  }
+}, [chatData.messageData]);
+
+
+
 
   return (
-  
+    
       <div className="w-full h-full relative">
         {/* *****************Sidebar********************* */}
         <div className="fixed left-0 w-20 h-full z-10 bg-[var(--sidebar-color)] py-6 text-white  flex flex-col items-center gap-24">
@@ -55,6 +93,7 @@ function App() {
         {/* ******************Chat Container************************* */}
         <ChatContainer/>
       </div>
+       
   )
 }
 
