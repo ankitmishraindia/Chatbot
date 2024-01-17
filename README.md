@@ -59,7 +59,7 @@ The chatbot web app provides a user-friendly interface for interacting with a ch
 5. Set your openAPI apikey in .env file.
 
 ## Project Structure
-
+```
 chatbot/
   ├── frontend-chatbot/
   │   ├── src/
@@ -74,7 +74,7 @@ chatbot/
   │   ├── ...
   ├── README.md
 
-
+```
 
 
 
