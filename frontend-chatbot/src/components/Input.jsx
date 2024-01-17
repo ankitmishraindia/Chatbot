@@ -26,6 +26,7 @@ function Input(){
             setInputValue('')
             setChatData((prevChatData) => ({
                 ...prevChatData,
+                oldChats:[res.data.updated,...prevChatData.oldChats],
                 messageData: 
                   res.data.updated.messages
                 ,

@@ -26,6 +26,7 @@ function PreviousChats(){
                 const res=await axios.delete(`http://localhost:7000/chatbot/deleteChats?context=${chatData.context}`)
                 console.log(res.data)
                 setChatData((state)=>({...state,
+                        oldChats:state.oldChats.filter((item)=>item.context!==res.data.conversation.context),
                         messageData:[],
                        context:'New Chat'}))
                        console.log('successfully delete clicked')

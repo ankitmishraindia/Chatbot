@@ -26,11 +26,14 @@ The chatbot web app provides a user-friendly interface for interacting with a ch
 - Serverless connection with mongodb atlas
 
 
+
 ## Getting Started
 
 ### Prerequisites
 
 - Node.js and npm installed on your machine.
+- MongoDB Atlas Cluster connection URI.
+- OpenAPI apikey.
 
 ### Installation
 
@@ -47,14 +50,16 @@ The chatbot web app provides a user-friendly interface for interacting with a ch
 ``````
 
 3. Install Backend
-   ```bash``````
+``````
    cd backend-chatbot
    npm install
 ``````
-   
+4. Set your .env file with mongodb cluster connection.
+
+5. Set your openAPI apikey in .env file.
 
 ## Project Structure
-```
+
 chatbot/
   ├── frontend-chatbot/
   │   ├── src/
@@ -64,10 +69,12 @@ chatbot/
   ├── backend-chatbot/
   │   ├── server.js
   │   ├── package.json
+  │   ├── src/
+  │   ├──.env│
   │   ├── ...
   ├── README.md
 
-```
+
 
 
 

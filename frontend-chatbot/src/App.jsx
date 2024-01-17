@@ -37,7 +37,7 @@ function App() {
          }
          getData()
       }
-    ,[setChatData]
+    ,[]
 )
  
 useEffect(() => {
