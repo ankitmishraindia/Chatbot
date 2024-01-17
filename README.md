@@ -96,11 +96,11 @@ chatbot/
 
 ## API Documentation
 
-- The backend API provides the following endpoints:
+###### The backend API provides the following endpoints:
 
-GET /chatbot/oldChats: Retrieve chat messages.
-POST /chatbot/updateChats: Send a user message to the chatbot.
-delete /chatbot/deleteChats: Delete current conversations to the chatbot.
-For detailed API documentation, refer to the API Documentation file.
+- GET /chatbot/oldChats: Retrieve chat messages.
+- POST /chatbot/updateChats: Send a user message to the chatbot.
+- delete /chatbot/deleteChats: Delete current conversations to the chatbot.
+- For detailed API documentation, refer to the API Documentation file.
 
 
