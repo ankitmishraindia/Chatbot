@@ -4,7 +4,7 @@ import connectionToDB from "./src/connection/ConnectToDB.js";
 
 
 
-const PORT=process.env.PORT;
+const PORT=process.env.PORT || 7000;
 
 
 

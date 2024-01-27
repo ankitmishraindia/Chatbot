@@ -85,7 +85,7 @@ chatbot/
  cd frontend-chatbot
  npm run dev
 ```````
-2. The backend will run at http://localhost:5173.
+2. The frontend will run at http://localhost:5173.
 
 3. Start the backend Server.
 ```
