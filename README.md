@@ -1,6 +1,13 @@
 # Chatbot Web App
 
 A simple chatbot web app powered by OpenAI API, built with React.js for the frontend and Express.js for the backend.
+By the use of chatbot, you can chat through openAPI by
+ ###### Make new Chat
+ ###### Do chat with history
+ ###### delete chat from database
+
+ ![Alt text](image.png)
+
 
 ## Table of Contents
 
