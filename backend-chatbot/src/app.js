@@ -17,7 +17,9 @@ app.use(cors({
 app.use(express.urlencoded({ extended: true }));
 
 
+
+
 //import route
-app.use('/chatbot/',routes)
+app.use('/',routes)
 
 export default app;
