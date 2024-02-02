@@ -32,7 +32,7 @@ export const updateChats=async (req,res)=>{
             throw new Error("Context or userMessage is empty")
         }
         //set instance of openapi
-        const openai=new OpenAI({apiKey:process.env.OPENAPI_KEY||'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'}) 
+        const openai=new OpenAI({apiKey:process.env.OPENAPI_KEY}) 
 
         //find context for new chat
         if(context==='New Chat'){
