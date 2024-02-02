@@ -10,7 +10,7 @@ const app=express();
 //middleware
 app.use(express.json())
 app.use(cors({
-    origin:process.env.FRONTEND_URI|| 'http://localhost:5173'
+    origin:'https://chatbot-frontend-lake.vercel.app/'
 }))
 
 //it is  used as a middleware to extract details from encoded urls 

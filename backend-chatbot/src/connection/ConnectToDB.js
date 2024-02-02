@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const connectionToDB=async ()=>{
     try {
         const { connection }=await mongoose.connect(
-            process.env.MONGO_URI
+            process.env.MONGO_URI||'mongodb+srv://mishraankit987:billano786@cluster0.grlzxjc.mongodb.net/Chatbot'
         )
         if(connection)
         {
